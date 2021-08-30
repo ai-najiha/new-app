@@ -13,6 +13,7 @@ function createRenderer() {
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor("#16161d");
+  renderer.setPixelRatio(window.devicePixelRatio);
   let output = document.querySelector("#output");
   output.appendChild(renderer.domElement);
   return renderer;
@@ -39,12 +40,27 @@ function createAxesHelper() {
   return axesHelper;
 }
 
+function getRandomColor() {
+  let colors = [
+    "dodgerblue",
+    "tomato",
+    "limegreen",
+    "rebeccapurple",
+    "gold",
+    "lavender",
+    "lightcoral",
+    "papayawhip",
+  ];
+  let randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
+}
+
 function createCube() {
   //Geometry-skeleton of the obj
   let geometry = new THREE.BoxGeometry(4, 4, 4);
   //Material-color/how it interect with light
   let material = new THREE.MeshLambertMaterial({
-    color: "pink",
+    color: getRandomColor(),
   });
   //Mesh-combine material and geometry
   let mesh = new THREE.Mesh(geometry, material);
@@ -55,14 +71,14 @@ function createCube() {
 function createSphere() {
   let geometry = new THREE.SphereGeometry(4, 30, 30);
   let material = new THREE.MeshLambertMaterial({
-    color: "red",
+    color: getRandomColor(),
   });
   let mesh = new THREE.Mesh(geometry, material);
   return mesh;
 }
 
 function createLight() {
-  let light = new THREE.PointLight("white", 1);
+  let light = new THREE.PointLight("white", 1.2);
   return light;
 }
 
